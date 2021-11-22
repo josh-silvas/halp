@@ -181,7 +181,6 @@ linters:
     disable:
         - maligned
         - prealloc
-        - errorlint
     disable-all: false
     presets:
         - bugs
