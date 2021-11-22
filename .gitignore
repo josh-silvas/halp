@@ -1,0 +1,24 @@
+# IntelliJ Files
+.idea/
+*.iml
+
+# Secret Files
+.auth
+.token
+.pass
+local
+
+# binary files
+/build/*
+*.pyc
+
+# Generated JSON Files for docserver
+docs/swagger.json
+
+playground/
+plugins/winr/*
+
+# Random OS files
+.qicon
+.qnicon
+.DS_Store
