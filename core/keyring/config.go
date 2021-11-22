@@ -18,14 +18,16 @@ const (
 )
 
 // Settings type is the structure representation of
-// the gokeys ini profile held in the .config directory
+// the keyring ini profile held in the .config directory
 type Settings struct {
-	User   string
-	Key    map[Service]keyring.Keyring
-	pin    int
-	File   *ini.File
-	Source string
-	Test   bool
+	User         string
+	JIRAInstance string
+	JIRAUser     string
+	Key          map[Service]keyring.Keyring
+	pin          int
+	File         *ini.File
+	Source       string
+	Test         bool
 }
 
 // CreateIfNotExist function will create the directory and file for the config
@@ -93,6 +95,28 @@ func (s *Settings) loadBaseSection(cfg *ini.File) error {
 		key.Comment = "Full name"
 	}
 	s.User = key.String()
+
+	// Set or prompt for the jira_token variable
+	jiraInstance, err := sec.GetKey("jira_instance")
+	if err != nil {
+		jiraInstance, err = sec.NewKey("jira_instance", prompt("Enter the jira instance name (<company_name>.atlassian.net)"))
+		if err != nil {
+			return err
+		}
+		jiraInstance.Comment = "Jira Instance Name"
+	}
+	s.JIRAInstance = jiraInstance.String()
+
+	// Set or prompt for the jira_token variable
+	jiraUser, err := sec.GetKey("jira_username")
+	if err != nil {
+		jiraUser, err = sec.NewKey("jira_username", prompt("Enter the jira username (<username>@example.com)"))
+		if err != nil {
+			return err
+		}
+		jiraUser.Comment = "Jira User Name"
+	}
+	s.JIRAUser = jiraUser.String()
 
 	// If we are using a supported keyring backend, then we don't need to set
 	// a pin.

@@ -26,6 +26,7 @@ func Plugin(p *core.Parser) core.Plugin {
 
 type (
 	client struct {
+		cfg        keyring.Settings
 		jiraToken  keyring.Credential
 		tempoToken keyring.Credential
 		client     http.Client
@@ -51,6 +52,7 @@ func pluginFunc(cfg keyring.Settings) {
 	}
 
 	c := &client{
+		cfg:        cfg,
 		jiraIssues: make(map[string]JIRAIssue),
 		client: http.Client{
 			Transport: &http.Transport{
@@ -265,7 +267,7 @@ func (c *client) fetchJiraIssue(issueKey string) (JIRAIssue, error) {
 	req, err := http.NewRequestWithContext(
 		ctx,
 		http.MethodGet,
-		fmt.Sprintf("https://networktocode.atlassian.net/rest/api/2/issue/%s", issueKey),
+		fmt.Sprintf("https://%s/rest/api/2/issue/%s", c.cfg.JIRAInstance, issueKey),
 		nil,
 	)
 	if err != nil {
@@ -274,7 +276,7 @@ func (c *client) fetchJiraIssue(issueKey string) (JIRAIssue, error) {
 
 	// Setting the request header for CTK token auth
 	req.Header.Set("Content-Type", "application/json")
-	req.SetBasicAuth("josh.silvas@networktocode.com", c.jiraToken.Password)
+	req.SetBasicAuth(c.cfg.JIRAUser, c.jiraToken.Password)
 
 	query := req.URL.Query()
 	limitFields := []string{
