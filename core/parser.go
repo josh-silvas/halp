@@ -35,7 +35,7 @@ var debugFlag *bool
 func NewParser(fn ...func(*Parser) Plugin) Parser {
 	// Create new main parser object
 	p := Parser{
-		Parser:  argparse.NewParser(AppName, "Go app to run migration related tasks that used to be junky scripts"),
+		Parser:  argparse.NewParser(AppName, "Please Halp me! Basic CLI tool to run quick functions."),
 		Plugins: make([]Plugin, 0),
 	}
 

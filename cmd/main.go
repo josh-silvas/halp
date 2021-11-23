@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/josh5276/halp/core"
 	"github.com/josh5276/halp/core/keyring"
-	"github.com/josh5276/halp/plugins/tempo"
+	"github.com/josh5276/halp/plugins/jira"
 	"github.com/josh5276/halp/plugins/version"
 	"github.com/sirupsen/logrus"
 )
@@ -28,7 +28,7 @@ func main() {
 	// This is where the arg commands are defined and the func to execute
 	// when called.
 	parser := core.NewParser(
-		tempo.Plugin,
+		jira.Plugin,
 		version.Plugin,
 	)
 

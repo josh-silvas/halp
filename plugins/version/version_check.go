@@ -133,7 +133,7 @@ type APIResp struct {
 	NodeID string `json:"node_id"`
 }
 
-// FromAPI function will get the standard version from the migration API
+// FromAPI function will get the standard version from GitHub
 func FromAPI() (*semver.Version, error) {
 	var res = make([]APIResp, 0)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*60)
@@ -178,6 +178,7 @@ func FromAPI() (*semver.Version, error) {
 		if err != nil {
 			return nil, err
 		}
+
 		if v.GreaterThan(latestVer) {
 			latestVer = v
 		}
