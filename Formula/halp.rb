@@ -6,16 +6,16 @@ class Halp < Formula
   desc "Halp is a cli helper to manage Tempo/Jira tooling and other things.
 "
   homepage "https://github.com/josh5276/halp"
-  version "0.1.0"
+  version "0.1.1"
   bottle :unneeded
 
   if OS.mac? && Hardware::CPU.intel?
-    url "https://github.com/josh5276/halp/releases/download/0.1.0/halp_Darwin_x86_64.tar.gz"
-    sha256 "2f2130a7a12e63d3f8f99b520f97c80ac624dab30968de23f40ae0114d44ab4e"
+    url "https://github.com/josh5276/halp/releases/download/0.1.1/halp_Darwin_x86_64.tar.gz"
+    sha256 "548c963490144911b5cdc5dccc3db7b2c93342fe0a5a5b092ccbdcea62972ec0"
   end
   if OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/josh5276/halp/releases/download/0.1.0/halp_Linux_x86_64.tar.gz"
-    sha256 "8dab10781beb7850e532651e07d452bad08321d31863b9cbe4fbf7aa28e3f1f1"
+    url "https://github.com/josh5276/halp/releases/download/0.1.1/halp_Linux_x86_64.tar.gz"
+    sha256 "64d31d971c024d93dfbb9cc726c96fe4ac2c4f17449796d044ba1be5e4911575"
   end
 
   def install
@@ -23,12 +23,12 @@ class Halp < Formula
   end
 
   def caveats; <<~EOS
-    Halp v0.1.0 Notes:
+    Halp v0.1.1 Notes:
       1. Halp will create it's own system keychain called 'Go Internal'
         1a. You may need to reauthenticate halp to this keychain after update because the binary is
             a different signature.
       2. Release changelog located at:
-        - https://github.com/josh5276/halp/releases/tag/0.1.0
+        - https://github.com/josh5276/halp/releases/tag/0.1.1
       3. For issues with this tool, please sumbit a GitHub issue here:
         - https://github.com/josh5276/halp/issues
   EOS
